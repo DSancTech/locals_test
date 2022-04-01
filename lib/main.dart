@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage> {
   late Future<LocalsUser> currentUser;
   var api = LocalsApi();
   var constants = LocalsTestConstants();
+
   int feedOrderIndex = 0;
   List<LocalsPost> feedData = [];
   late ScrollController feedScrollController;
@@ -47,7 +48,11 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+
+    /// Add listener to the feed's scroll controller, used for pagination.
     feedScrollController = ScrollController()..addListener(loadMoreFeed);
+
+    /// Call initial setup (log in and then get page one of feed.
     initialSetup();
   }
 
@@ -118,7 +123,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     final double topSafeArea = MediaQuery.of(context).padding.top;
     final double bottomSafeArea = MediaQuery.of(context).padding.bottom;
 
@@ -260,14 +264,14 @@ class _HomePageState extends State<HomePage> {
         return AlertDialog(
           backgroundColor: appBarColor,
           title: const Text(
-            "Connection Error",
+            'Connection Error',
             style: TextStyle(
               color: mainTextColor,
               fontWeight: FontWeight.w400,
             ),
           ),
           content: const Text(
-            "It looks like you are not connected to the internet. Please check if you are on airplane mode and try again.",
+            'It looks like you are not connected to the internet. Please check if you are on airplane mode and try again.',
             style: TextStyle(
               color: mainTextColor,
               fontWeight: FontWeight.w200,
@@ -276,7 +280,7 @@ class _HomePageState extends State<HomePage> {
           actions: <Widget>[
             TextButton(
               child: const Text(
-                "Retry",
+                'Retry',
                 style: TextStyle(
                   color: selectionColor,
                   fontWeight: FontWeight.w700,
